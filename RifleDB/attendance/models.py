@@ -14,9 +14,8 @@ class Member(models.Model):
 
 
 class AccessCard(models.Model):
-    # Django cannot handle primary keys made of multiple columns, let it generate a default one
+    rfid = models.CharField('RFID', primary_key=True, max_length=10)
     member = models.ForeignKey(Member)
-    rfid = models.CharField(primary_key=True, max_length=10)
     reg_date = models.DateField('Registration date', default=datetime.datetime.today())
 
     def __str__(self):
@@ -25,9 +24,9 @@ class AccessCard(models.Model):
 
 class LoggingEvent(models.Model):
     # Django cannot handle primary keys made of multiple columns, let it generate a default one
-    rfid = models.CharField(max_length=10)
-    check_in = models.DateTimeField('Check in', default=datetime.datetime.today())
-    check_out = models.DateTimeField('Check out', default=None, blank=True, null=True)
+    rfid = models.CharField('RFID', max_length=10)
+    check_in = models.DateTimeField('Check in', default=datetime.datetime.today()) # TODO: unit test that check-in cannot be in the future
+    check_out = models.DateTimeField('Check out', default=None, blank=True, null=True) # TODO: unit test that check-out cannot be in the future
 
     def __str__(self):
         return "%s from %s to %s" % (self.rfid, self.check_in, self.check_out)
