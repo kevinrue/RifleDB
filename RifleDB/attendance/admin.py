@@ -19,7 +19,7 @@ class MemberAdmin(admin.ModelAdmin):
     readonly_fields = ('reg_date',)
 
 
-class AcessCardAdmin(admin.ModelAdmin):
+class AccessCardAdmin(admin.ModelAdmin):
     # formfield_overrides = {
     # models.: {'widget': TextInput(attrs={'size':'8'})},
     # models.TextField: {'widget': Textarea(attrs={'rows':4, 'cols':40})},
@@ -67,7 +67,7 @@ class LoggingEventAdmin(admin.ModelAdmin):
 
 # Register models
 admin.site.register(Member, MemberAdmin)
-admin.site.register(AccessCard, AcessCardAdmin)
+admin.site.register(AccessCard, AccessCardAdmin)
 admin.site.register(LoggingEvent, LoggingEventAdmin)
 
 members__name__startswith = 'Paul'
