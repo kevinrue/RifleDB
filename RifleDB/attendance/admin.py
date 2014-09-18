@@ -25,7 +25,7 @@ class AccessCardAdmin(admin.ModelAdmin):
     # models.TextField: {'widget': Textarea(attrs={'rows':4, 'cols':40})},
     # }
     fieldsets = [
-        ('Registration', {'fields': ['member', 'rfid', 'reg_date']}),
+        ('Registration', {'fields': ['member', 'rfid', 'reg_date']}), # TODO: the dropdown menu to chose member should list f_name,l_name in addition to student_id
     ]
     list_display = ('rfid', 'member', 'get_f_name', 'get_l_name', 'reg_date')
     readonly_fields = ('reg_date',)
