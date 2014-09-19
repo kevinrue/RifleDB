@@ -53,16 +53,14 @@ class LoggingEventAdmin(admin.ModelAdmin):
     list_display = ('rfid', 'get_f_name', 'get_l_name', 'check_in', 'check_out')
 
     def get_f_name(self, obj):
-        print(obj.rfid)
         return AccessCard.objects.get(pk=obj.rfid).member.f_name
 
     get_f_name.short_description = 'First name'
 
     def get_l_name(self, obj):
-        print(obj.rfid)
         return AccessCard.objects.get(pk=obj.rfid).member.l_name
 
-    get_f_name.short_description = 'Last name'
+    get_l_name.short_description = 'Last name'
 
 
 # Register models
