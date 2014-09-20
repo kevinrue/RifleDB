@@ -6,4 +6,4 @@ def index(request):
     members_checked_in = Member.objects.filter(checked_in=True)
     output = '\n'.join([p.f_name for p in members_checked_in])
     return HttpResponse(output)
-    return HttpResponse("Hello, world. This is the index page of the attendance app.")
+
