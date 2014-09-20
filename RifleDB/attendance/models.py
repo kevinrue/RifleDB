@@ -8,6 +8,7 @@ class Member(models.Model):
     f_name = models.CharField('First name', max_length=50)
     l_name = models.CharField('Last name', max_length=50)
     reg_date = models.DateField('Registration date', default=datetime.datetime.today())
+    checked_in = models.BooleanField('Checked in?', default=False, )
 
     def __str__(self):
         return self.student_id
