@@ -1,0 +1,10 @@
+{% if members_checked_in %}
+    <h1>Members currently checked in:</h1>
+    <ul>
+    {% for member in members_checked_in %}
+        <li>{{ member.f_name }} {{ member.l_name }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No member is currently checked in.</p>
+{% endif %}
