@@ -66,5 +66,3 @@ class LoggingEventAdmin(admin.ModelAdmin):
 admin.site.register(Member, MemberAdmin)
 admin.site.register(AccessCard, AccessCardAdmin)
 admin.site.register(LoggingEvent, LoggingEventAdmin)
-
-members__name__startswith = 'Paul'
