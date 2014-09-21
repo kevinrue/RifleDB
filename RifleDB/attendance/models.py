@@ -11,7 +11,7 @@ class Member(models.Model):
     checked_in = models.BooleanField('Checked in?', default=False, )
 
     def __str__(self):
-        return self.student_id
+        return '%s <%s, %s>' % (self.student_id, self.l_name, self.f_name)
 
 
 class AccessCard(models.Model):
