@@ -1,4 +1,8 @@
-{% block champ_swipe_card %}
+{% extends "attendance/base.html" %}
+
+{% block body %}
+
+{% block swipe_card_form %}
 {% endblock %}
 
 <h1>Members currently checked in</h1>
@@ -12,7 +16,4 @@
     <p>No member is currently checked in.</p>
 {% endif %}
 
-{% block link_to_swipe %}
-<a href="{% url 'attendance:swipe' %}">Go to the card swipe application</a>
 {% endblock %}
-

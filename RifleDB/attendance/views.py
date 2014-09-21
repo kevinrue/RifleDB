@@ -25,7 +25,7 @@ def checkInOut(request):
     try:
         card = AccessCard.objects.get(pk=rfid)
     except (KeyError, AccessCard.DoesNotExist):
-        l = LoggingEvent(rfid=rfid, check_in=datetime.datetime.now(), check_out=None)
+        l = LoggingEvent(rfid=rfid, check_in=datetime.datetime.now(), valid=False)
         l.save()
         # Redisplay the RFID input form.
         return render(request, 'attendance/RFID_form.html', {
@@ -38,7 +38,7 @@ def checkInOut(request):
     latest_card = AccessCard.objects.filter(member=m.student_id).order_by('-reg_date')[0]
     # if the card swiped is not the latest card for that member, log the attempt as a non-member above
     if card != latest_card:
-        l = LoggingEvent(rfid=rfid, check_in=datetime.datetime.now(), check_out=None)
+        l = LoggingEvent(rfid=rfid, check_in=datetime.datetime.now(), valid=False)
         l.save()
         # Redisplay the RFID input form.
         return render(request, 'attendance/RFID_form.html', {
@@ -46,13 +46,13 @@ def checkInOut(request):
             'members_checked_in': members_checked_in,
         })
     if m.checked_in:
-        # if it is a checked-in member, put the timestamp in 'check_in' column
+        # if it is a checked-in member, put the timestamp in 'check_out' column
         l = LoggingEvent.objects.filter(rfid=card.rfid).order_by('-check_in')[0]
         l.check_out = datetime.datetime.now()
         l.save()
     else:
-        # if it is a checked-out member, create a new entry and put the timestamp in 'check_out' column
-        l = LoggingEvent(rfid=rfid, check_in=datetime.datetime.now(), check_out=None)
+        # if it is a checked-out member, create a new entry and put the timestamp in 'check_in' column
+        l = LoggingEvent(rfid=rfid, check_in=datetime.datetime.now(), valid=True)
         l.save()
         # Switch the status from in to out or vice-versa
     m.checked_in = 1 - m.checked_in

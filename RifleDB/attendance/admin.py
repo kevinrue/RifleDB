@@ -4,6 +4,11 @@ from attendance.models import Member, AccessCard, LoggingEvent
 
 
 # Customised model admin objects
+
+def check_out(modeladmin, request, queryset):
+    queryset.update(checked_in=False)
+check_out.short_description = "Check out selected members"
+
 class MemberAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Registration', {'fields': ['student_id', 'reg_date']}),
@@ -11,8 +16,12 @@ class MemberAdmin(admin.ModelAdmin):
         ('Status', {'fields': ['checked_in']}),
         ('Contact details', {'fields': []}), # TODO: admin should also see and update address, phone, card, ... in the same form
     ]
+    ordering = ['-student_id']
     list_display = ('student_id', 'f_name', 'l_name', 'checked_in', 'reg_date')
     readonly_fields = ('reg_date',)
+    list_filter = ('checked_in',)
+    search_fields = ['f_name', 'l_name', 'reg_date']
+    actions = [check_out]
 
 
 class AccessCardAdmin(admin.ModelAdmin):
@@ -46,10 +55,10 @@ class LoggingEventAdmin(admin.ModelAdmin):
     # models.TextField: {'widget': Textarea(attrs={'rows':4, 'cols':40})},
     # }
     fieldsets = [
-        ('Check-in', {'fields': ['check_in', 'rfid']}),
+        ('Check-in', {'fields': ['check_in', 'rfid', 'valid']}),
         ('Check-out', {'fields': ['check_out']}),
     ]
-    list_display = ('rfid', 'get_f_name', 'get_l_name', 'check_in', 'check_out')
+    list_display = ('rfid', 'get_f_name', 'get_l_name', 'check_in', 'valid', 'check_out')
 
     def get_f_name(self, obj):
         return AccessCard.objects.get(pk=obj.rfid).member.f_name

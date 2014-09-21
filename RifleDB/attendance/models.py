@@ -28,7 +28,7 @@ class LoggingEvent(models.Model):
     rfid = models.CharField('RFID', max_length=10)
     check_in = models.DateTimeField('Check in', default=datetime.datetime.today()) # TODO: unit test that check-in cannot be in the future
     check_out = models.DateTimeField('Check out', default=None, blank=True, null=True) # TODO: unit test that check-out cannot be in the future
-    #valid = models.BooleanField('Valid?', default=False, )
+    valid = models.BooleanField('Valid?', default=False, )
 
     def __str__(self):
         return "%s from %s to %s" % (self.rfid, self.check_in, self.check_out)
