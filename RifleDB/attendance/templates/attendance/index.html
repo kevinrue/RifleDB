@@ -1,5 +1,8 @@
+{% block champ_swipe_card %}
+{% endblock %}
+
+<h1>Members currently checked in</h1>
 {% if members_checked_in %}
-    <h1>Members currently checked in:</h1>
     <ul>
     {% for member in members_checked_in %}
         <li>{{ member.f_name }} {{ member.l_name }}</li>
@@ -9,4 +12,7 @@
     <p>No member is currently checked in.</p>
 {% endif %}
 
+{% block link_to_swipe %}
 <a href="{% url 'attendance:swipe' %}">Go to the card swipe application</a>
+{% endblock %}
+

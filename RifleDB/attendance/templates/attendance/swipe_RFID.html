@@ -1,7 +1,6 @@
 {% extends "attendance/index.html" %}
 
 {% block champ_swipe_card %}
-<!-- Fill this empty block from index with the form for RFID. -->
 <h1>
     Please, swipe your card to check in/out
 </h1>
@@ -31,8 +30,4 @@
 </form>
 
 <script type="text/javascript">rfid_form.rfid_field.focus();</script>
-{% endblock %}
-
-{% block link_to_swipe %}
-    <!--Remove the link which point from index to this page-->
 {% endblock %}

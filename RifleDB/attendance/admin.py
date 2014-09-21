@@ -12,7 +12,7 @@ class MemberAdmin(admin.ModelAdmin):
         ('Contact details', {'fields': []}), # TODO: admin should also see and update address, phone, card, ... in the same form
     ]
     list_display = ('student_id', 'f_name', 'l_name', 'checked_in', 'reg_date')
-    readonly_fields = ('reg_date', 'checked_in',)
+    readonly_fields = ('reg_date',)
 
 
 class AccessCardAdmin(admin.ModelAdmin):
