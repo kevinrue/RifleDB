@@ -21,7 +21,7 @@ class AccessCardAdmin(admin.ModelAdmin):
         # TODO: the dropdown menu to chose member should list f_name,l_name in addition to student_id
         # TODO: the student numbers should be sorted numerically/alphabetically for easier search
     ]
-    list_display = ('rfid', 'member', 'get_f_name', 'get_l_name', 'reg_date')
+    list_display = ('rfid', 'get_member_id', 'get_f_name', 'get_l_name', 'reg_date')
     readonly_fields = ('reg_date',)
 
     def get_f_name(self, obj):
@@ -33,6 +33,11 @@ class AccessCardAdmin(admin.ModelAdmin):
         return obj.member.l_name
 
     get_l_name.short_description = 'Last name'
+
+    def get_member_id(self, obj):
+        return obj.member.student_id
+
+    get_member_id.short_description = 'Student ID'
 
 
 class LoggingEventAdmin(admin.ModelAdmin):
