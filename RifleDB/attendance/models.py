@@ -26,7 +26,7 @@ class AccessCard(models.Model):
 class LoggingEvent(models.Model):
     # Django cannot handle primary keys made of multiple columns, let it generate a default one
     rfid = models.CharField('RFID', max_length=10)
-    check_in = models.DateTimeField('Check in', default=datetime.datetime.today()) # TODO: unit test that check-in cannot be in the future
+    check_in = models.DateTimeField('Check in', default=datetime.datetime.now()) # TODO: unit test that check-in cannot be in the future
     check_out = models.DateTimeField('Check out', default=None, blank=True, null=True) # TODO: unit test that check-out cannot be in the future
     valid = models.BooleanField('Valid?', default=False, )
 

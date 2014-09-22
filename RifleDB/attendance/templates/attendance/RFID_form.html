@@ -8,7 +8,7 @@
 
 {% if error_message %}
 <p>
-    <strong>
+    <strong title='error'>
         {{ error_message }}
     </strong>
 </p>
@@ -16,7 +16,7 @@
 
 {% if member %}
 <p>
-    <strong>Latest transaction:</strong>
+    <strong title='success'>Latest transaction:</strong>
     {% if member.checked_in %}
     {{ member.f_name }} {{ member.l_name }} checked in.
     {% else %}

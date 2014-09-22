@@ -1,0 +1,7 @@
+strong[title=error] {
+    color: red;
+}
+
+strong[title=success] {
+    color: green;
+}
