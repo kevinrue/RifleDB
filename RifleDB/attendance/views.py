@@ -55,7 +55,7 @@ def checkInOut(request):
     # if it is a checked-in member
     if m.checked_in:
         # Get the latest check-in
-        ls = LoggingEvent.objects.filter(rfid=card.rfid).order_by('-check_in')
+        ls = LoggingEvent.objects.filter(rfid=card.rfid).exclude(check_in=None).order_by('-check_in')
         if len(ls) >= 1:
             l = ls[0]
             # Check that the latest check-in was at least 1 min ago
@@ -76,7 +76,7 @@ def checkInOut(request):
     # if it is a checked-out member,
     else:
         # Get the latest entry for that member in the logging table
-        old_ls = LoggingEvent.objects.filter(rfid=card.rfid).order_by('-check_out')
+        old_ls = LoggingEvent.objects.filter(rfid=card.rfid).exclude(check_out=None).order_by('-check_out')
         if len(old_ls) >= 1:
             old_l = old_ls[0]
             # Check that the latest check-out was at least 1 min ago
