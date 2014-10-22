@@ -25,7 +25,11 @@ class MemberAdmin(admin.ModelAdmin):
     search_fields = ['student_id', 'f_name', 'l_name', 'reg_date']
 
     def get_current_card(self, obj):
-        return AccessCard.objects.filter(member=obj.student_id).order_by('-reg_date')[0].rfid
+        rfids = AccessCard.objects.filter(member=obj.student_id).order_by('-reg_date')
+        if len(rfids) >= 1:
+            return rfids[0]
+        else:
+            return None
 
     get_current_card.short_description = 'Latest card'
 
